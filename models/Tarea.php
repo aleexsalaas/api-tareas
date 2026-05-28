@@ -34,7 +34,13 @@ class Tarea{
 
         $stmt = $this->conn->prepare($query);
 
-        return $stmt->execute([':id'=>$id]);
+        $stmt->execute([':id'=>$id]);
+
+        if($stmt->rowCount()> 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function actualizarEstado($id, $estado){
@@ -42,6 +48,12 @@ class Tarea{
 
         $stmt = $this->conn->prepare($query);
 
-        return $stmt->execute([':id'=> $id, ':estado'=>$estado]);
+        $stmt->execute([':id'=> $id, ':estado'=>$estado]);
+
+        if($stmt->rowCount()> 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
