@@ -28,4 +28,12 @@ class Tarea{
         return $stmt->execute([':titulo'=>$titulo, ':descripcion'=>$descripcion, ':fecha_limite'=>$fecha_limite]);
 
     }
+
+    public function borrar($id){
+        $query = "DELETE FROM ". $this->table_name ." WHERE id = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+        return $stmt->execute([':id'=>$id]);
+    }
 }
