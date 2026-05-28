@@ -24,6 +24,9 @@ try{
         http_response_code(200);
         echo json_encode(['status'=>'ok','mensaje'=>'Tarea eliminada.']);
         exit();
+    } else{
+        http_response_code(404);
+        echo json_encode(['status'=>'error','mensaje'=>'La tarea no existe.']);
     }
 
 } catch(\PDOException $e){

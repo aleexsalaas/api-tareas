@@ -33,6 +33,9 @@ try{
         http_response_code(200);
         echo json_encode(['status'=>'ok','mensaje'=>'Estado actualizado correctamente.']);
         exit();
+    } else {
+        http_response_code(404);
+        echo json_encode(['status'=>'error','mensaje'=>'La tarea no existe.']);
     }
 } catch(\PDOException $e){
     error_log('Error critico en Actualizar estado: '. $e->getMessage());
