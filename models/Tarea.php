@@ -36,4 +36,12 @@ class Tarea{
 
         return $stmt->execute([':id'=>$id]);
     }
+
+    public function actualizarEstado($id, $estado){
+        $query = "UPDATE ". $this->table_name ." SET estado = :estado WHERE id = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+        return $stmt->execute([':id'=> $id, ':estado'=>$estado]);
+    }
 }
