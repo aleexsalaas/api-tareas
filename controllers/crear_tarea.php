@@ -18,8 +18,8 @@ if(!isset($_POST['titulo'])){
 }
 
 $titulo = $_POST['titulo'];
-$descripcion = $_POST['descripcion'] ?? null;
-$fecha_limite = $_POST['fecha_limite'] ?? null;
+$descripcion = empty($_POST['descripcion']) ? null : $_POST['descripcion'];
+$fecha_limite = empty($_POST['fecha_limite']) ? null : $_POST['fecha_limite'];
 
 try{
 
@@ -31,6 +31,6 @@ try{
 
 } catch(\PDOException $e){
     http_response_code(500);
-    echo json_encode(['status'=>'error','mensaje'=>'Error al crear la Tarea.']);
+    echo json_encode(['status'=>'error','mensaje'=>'Error al crear la Tarea: '. $e->getMessage()]);
     exit();
 }
