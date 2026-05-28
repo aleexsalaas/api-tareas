@@ -18,6 +18,14 @@ class Tarea{
         $stmt->execute();
 
         return $stmt;
+    }
 
-}
+    public function crear($titulo, $descripcion, $fecha_limite){
+        $query = "INSERT INTO ". $this->table_name ."(titulo, descripcion, fecha_limite) VALUES(:titulo, :descripcion, :fecha_limite)";
+
+        $stmt = $this->conn->prepare($query);
+
+        return $stmt->execute([':titulo'=>$titulo, ':descripcion'=>$descripcion, ':fecha_limite'=>$fecha_limite]);
+
+    }
 }
