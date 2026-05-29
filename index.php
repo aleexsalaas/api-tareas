@@ -6,6 +6,7 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
 
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -17,7 +18,11 @@ switch($recurso){
     case 'tarea':
         if($method === 'GET'){
             require 'controllers/listar_tareas.php';
-        } elseif( $method === 'POST'){
+        } else {
+
+        require 'middlewares/auth.php';
+        
+        if( $method === 'POST'){
             require 'controllers/crear_tarea.php';
         } elseif( $method === 'PUT'){
             require 'controllers/actualizar_estado.php';
@@ -28,7 +33,7 @@ switch($recurso){
             echo json_encode([
                 'Error'=>'Metodo no permitido'
             ]);
-        }
+        }}
         break;
 
 
