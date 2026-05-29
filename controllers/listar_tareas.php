@@ -2,8 +2,8 @@
 
 header('Content-Type: application/json');
 
-require '../config/db.php';
-require '../models/Tarea.php';
+require 'config/db.php';
+require 'models/Tarea.php';
 
 $dbclass = new Database();
 
