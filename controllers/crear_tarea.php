@@ -11,15 +11,17 @@ $db = $db_class->getConnection();
 
 $tarea = new Tarea($db);
 
-if(!isset($_POST['titulo'])){
+$data = json_decode(file_get_contents("php://input"));
+
+if(!isset($data->titulo)){
     http_response_code(400);
     echo json_encode(['status'=>'error','mensaje'=>'Faltan argumentos.']);
     exit();
 }
 
-$titulo = $_POST['titulo'];
-$descripcion = empty($_POST['descripcion']) ? null : $_POST['descripcion'];
-$fecha_limite = empty($_POST['fecha_limite']) ? null : $_POST['fecha_limite'];
+$titulo = $data->titulo;
+$descripcion = empty($data->descripcion) ? null : $data->descripcion;
+$fecha_limite = empty($data->fecha_limite) ? null : $data->fecha_limite;
 
 try{
 
