@@ -29,6 +29,11 @@ switch($recurso){
         }
         break;
 
+
+    case 'registro': require 'controllers/registro.php';
+    break;
+
+
     default:
         http_response_code(404);
         echo json_encode([
