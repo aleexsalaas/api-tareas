@@ -10,13 +10,15 @@ $db = $db_class->getConnection();
 
 $tarea = new Tarea($db);
 
-if(empty($_POST['id'])){
+$data = json_decode(file_get_contents("php://input"));
+
+if(empty($data->id)){
     http_response_code(400);
     echo json_encode(['status'=>'error','mensaje'=>'Faltan argumentos.']);
     exit();
 }
 
-$id = $_POST['id'];
+$id = $data->id;
 
 try{
 
