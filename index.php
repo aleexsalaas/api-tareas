@@ -32,6 +32,10 @@ switch($recurso){
 
     case 'registro': require 'controllers/registro.php';
     break;
+    
+    case 'login': require 'controllers/login.php';
+    break;
+    
 
 
     default:
