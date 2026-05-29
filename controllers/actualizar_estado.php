@@ -10,7 +10,9 @@ $db = $db_class->getConnection();
 
 $tarea = new Tarea($db);
 
-if(empty($_POST['id']) or empty($_POST['estado'])){
+$data = json_decode(file_get_contents("php://input"));
+
+if(empty($data->id) or empty($data->estado)){
     http_response_code(400);
     echo json_encode(['status'=>'error','mensaje'=>'Faltan argumentos.']);
     exit();
@@ -18,14 +20,14 @@ if(empty($_POST['id']) or empty($_POST['estado'])){
 
 $estados_permitidos = ['pendiente', 'en_progreso', 'completada'];
 
-if(!in_array($_POST['estado'], $estados_permitidos)){
+if(!in_array($data->estado, $estados_permitidos)){
     http_response_code(400);
     echo json_encode(['status'=>'error','mensaje'=>'El estado no se corresponde.']);
     exit();
 }
 
-$id = $_POST['id'];
-$estado = $_POST['estado'];
+$id = $data->id;
+$estado = $data->estado;
 
 try{
 
