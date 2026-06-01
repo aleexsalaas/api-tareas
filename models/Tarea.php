@@ -11,7 +11,7 @@ class Tarea{
 
     public function getTodas(){
 
-        $query = "SELECT * FROM ". $this->table_name ." ORDER BY fecha_creacion DESC";
+        $query = "SELECT tareas.titulo, tareas.descripcion, tareas.fecha_limite, tareas.estado, usuarios.email AS email_usuario FROM ". $this->table_name ." INNER JOIN usuarios ON usuarios.id = tareas.usuario_id ORDER BY tareas.fecha_creacion DESC";
 
         $stmt = $this->conn->prepare($query);
 
@@ -20,12 +20,12 @@ class Tarea{
         return $stmt;
     }
 
-    public function crear($titulo, $descripcion, $fecha_limite){
-        $query = "INSERT INTO ". $this->table_name ."(titulo, descripcion, fecha_limite) VALUES(:titulo, :descripcion, :fecha_limite)";
+    public function crear($titulo, $descripcion, $fecha_limite, $usuario_id){
+        $query = "INSERT INTO ". $this->table_name ."(titulo, descripcion, fecha_limite, usuario_id) VALUES(:titulo, :descripcion, :fecha_limite, :usuario_id)";
 
         $stmt = $this->conn->prepare($query);
 
-        return $stmt->execute([':titulo'=>$titulo, ':descripcion'=>$descripcion, ':fecha_limite'=>$fecha_limite]);
+        return $stmt->execute([':titulo'=>$titulo, ':descripcion'=>$descripcion, ':fecha_limite'=>$fecha_limite, ':usuario_id'=>$usuario_id]);
 
     }
 
